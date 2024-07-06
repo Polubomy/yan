@@ -122,7 +122,7 @@ class TestPet:
         }
         response = api_client.put(f"/pet", json=updated_pet)
         # pprint.pprint(response.json())
-        assert response.status_code == 200  # при обновлении пета, если его нет, то создается новый
+        assert response.status_code >= 400  # при обновлении пета, если его нет, то создается новый !bug report
 
     def test_delete_invalid_pet(self, api_client):
         pet_id = 9745868
