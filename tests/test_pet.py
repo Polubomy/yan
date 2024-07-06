@@ -1,7 +1,3 @@
-import pytest
-import pprint
-from api_client import ApiClient
-
 class TestPet:
 
     def test_add_pet(self, api_client):
