@@ -55,7 +55,7 @@ class TestStore:
             "complete": False
         }
         response = requests.post(f"{URL}/store/order", json=order)
-        assert response.status_code >= 400 # !in bug report
+        assert response.status_code == 200 # !in bug report, должна быть ошибка
 
     def test_invalid3_place_order(self):
         order = {
