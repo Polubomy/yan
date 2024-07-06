@@ -113,7 +113,7 @@ class TestPet:
         assert response.status_code == 404
 
     def test_invalid_update_pet(self):
-        pet_id = 974567
+        pet_id = 9741167
         response = requests.get(f"{URL}/pet/{pet_id}")
         assert response.status_code == 404
         assert response.json()["message"] == "Pet not found"  # тест проходит
