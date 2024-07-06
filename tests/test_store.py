@@ -4,7 +4,6 @@ class TestStore:
         response = api_client.get("/store/inventory")
         assert response.status_code == 200
 
-
     def test_place_order(self, api_client):
         order = {
             "id": 9,
