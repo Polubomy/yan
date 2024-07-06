@@ -87,7 +87,7 @@ class TestPet:
         }
         response1 = api_client.post("/pet", json=new_pet)
         response = api_client.get(f"/pet/2199")
-        # pprint.pprint(response.json())
+        #  pprint.pprint(response.json())
         assert response1.status_code == 200
         assert response.json()["id"] == 2199
 

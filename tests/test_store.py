@@ -1,7 +1,6 @@
 class TestStore:
 
     def test_get_inventory(self, api_client):
-
         response = api_client.get("/store/inventory")
         assert response.status_code == 200
 
