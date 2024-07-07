@@ -106,6 +106,24 @@ class TestUser:
         assert expires is not None
         assert rate is not None
 
+    def test_logout_user(self):
+        response = requests.get(f"{URL}/user/logout")
+        assert response.status_code == 200 # ?
+
+    def test_logout2_user(self):
+        data = {
+            "username": "test"
+        }
+        response = requests.get(f"{URL}/user/logout", json=data)
+        assert response.status_code == 200
+
+    def test_logout3_user(self):
+            data = {
+                "username": "2344bfegnbdtyu45645h64"
+            }
+            response = requests.get(f"{URL}/user/logout", json=data)
+            assert response.status_code == 200 # ?
+
     def test_invalid_get_user_by_username(self):
         username = "**ASDH#SAD"
         response = requests.get(f"{URL}/user/{username}")
@@ -145,6 +163,10 @@ class TestUser:
             "username": username,
             "password": password
         }
+
+        response_watch = requests.get(f"{URL}/user/{username}")
+        assert response_watch.status_code == 404 # # User not found
+
         response = requests.get(f"{URL}/user/login", params=user)
-        assert response.status_code == 200 # bug. Логинит несуществующий логин и пароль
-        # pprint.pprint(response.json())
+        assert response.status_code == 200 # (400) bug. Логинит несуществующий логин и пароль
+
