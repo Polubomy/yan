@@ -1,3 +1,5 @@
+**pytest -s -v**  
+  
 Python 3.12.3  
 
 certifi==2024.7.4  
