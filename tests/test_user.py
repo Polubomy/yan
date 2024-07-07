@@ -90,6 +90,22 @@ class TestUser:
         assert res1.json()["lastName"] == lastName
         assert res1.json()["password"] == password
 
+    def test_user_login(self):
+        username = "test"
+        password = "qwerty"
+
+        user = {
+            "username": username,
+            "password": password
+        }
+        response = requests.get(f"{URL}/user/login", params=user)
+        assert response.status_code == 200
+
+        expires = response.headers.get("X-Expires-After")
+        rate = response.headers.get("X-Rate-Limit")
+        assert expires is not None
+        assert rate is not None
+
     def test_invalid_get_user_by_username(self):
         username = "**ASDH#SAD"
         response = requests.get(f"{URL}/user/{username}")
@@ -120,3 +136,15 @@ class TestUser:
 
         get_empty_username_after_put = requests.get(f"{URL}/user/{username}")
         assert get_empty_username_after_put.status_code == 404 #При обновлении не добавился новый!
+
+    def test_invalid_user_login(self):
+        username = "fgdj65h*etj"
+        password = "412dgh124124"
+
+        user = {
+            "username": username,
+            "password": password
+        }
+        response = requests.get(f"{URL}/user/login", params=user)
+        assert response.status_code == 200 # bug. Логинит несуществующий логин и пароль
+        # pprint.pprint(response.json())
